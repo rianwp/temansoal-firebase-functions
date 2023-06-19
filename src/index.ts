@@ -17,12 +17,12 @@ type generateQuestionForm = {
 }
 
 export const buatsoal = onCall({secrets: ["OPENAI_API_KEY"]}, async (req) => {
-  const { mapel, tingkatKesulitan, haveOptions, topik, jumlahSoal } = req.data as generateQuestionForm
-  const jumlahSoalPrompt = `berikan ${jumlahSoal} jumlah soal ujian`
+  const { mapel, tingkatKesulitan, haveOptions, topik } = req.data as generateQuestionForm
+  const jumlahSoalPrompt = `berikan 1 soal ujian`
   const mapelPrompt = `untuk pelajaran ${mapel},`
   const tingkatKesulitanPrompt = `untuk tingkat ${tingkatKesulitan},`
   const topikPrompt = `dengan topik terkait: ${topik}`
-  const jawabanPrompt = `gunakan format json ${haveOptions ? `[{soal:"soal", pilihan:[{huruf: (A,B,C,D,E), deskripsi:"deskripsi"}], jawaban:{huruf: (A,B,C,D,E), deskripsi:"deskripsi"}, pembahasan: "pembahasan"}]` : `[{soal:"soal", jawaban:"jawaban", pembahasan: "pembahasan"}]`}.`
+  const jawabanPrompt = `gunakan format json ${haveOptions ? `{soal:"soal", pilihan:[{huruf: (A,B,C,D,E), deskripsi:"deskripsi"}], jawaban:{huruf: (A,B,C,D,E), deskripsi:"deskripsi"}, pembahasan: "pembahasan"}` : `{soal:"soal", jawaban:"jawaban", pembahasan: "pembahasan"}`}.`
   const aturanPrompt = `${haveOptions ? "pilihan dan jawaban harus menyertakan huruf(A,B,C,D,E) dalam huruf kapital" : ""}. Jangan tambahkan awalan angka pada setiap soal. Jika terdapat soal cerita yang berhubungan, tuliskan cerita pada setiap soal. Jika soal cerita minimal 1 paragraf.`
   const bahasaPrompt = `Gunakan referensi kurikulum di Indonesia.`
   const jsonPrompt = `Jangan tambahkan penjelasan apapun, hanya dengan bentuk json. Ikuti format ini tanpa penyimpangan.`
@@ -37,7 +37,7 @@ export const buatsoal = onCall({secrets: ["OPENAI_API_KEY"]}, async (req) => {
       }],
       stream: false,
       temperature,
-      max_tokens: 3500,
+      max_tokens: 1000,
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0,
