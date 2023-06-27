@@ -25,7 +25,7 @@ export const buatsoal = onCall({secrets: ["OPENAI_API_KEY"]}, async (req) => {
   const jawabanPrompt = `gunakan format json ${haveOptions ? `[{soal:"soal", pilihan:[{huruf: (A,B,C,D,E), deskripsi:"deskripsi"}], jawaban:{huruf: (A,B,C,D,E), deskripsi:"deskripsi"}, pembahasan: "pembahasan"}]` : `[{soal:"soal", jawaban:"jawaban", pembahasan: "pembahasan"}]`}.`
   const aturanPrompt = `${haveOptions ? "pilihan dan jawaban harus menyertakan huruf(A,B,C,D,E) dalam huruf kapital" : ""}. Jangan tambahkan awalan angka pada setiap soal. Jika terdapat soal cerita yang berhubungan, tuliskan cerita pada setiap soal. Jika soal cerita minimal 1 paragraf.`
   const bahasaPrompt = `Gunakan referensi kurikulum di Indonesia.`
-  const jsonPrompt = `Jangan tambahkan penjelasan apapun, hanya dengan bentuk json. Ikuti format ini tanpa penyimpangan. Berikan pembahasan hanya 2 baris saja`
+  const jsonPrompt = `Jangan tambahkan penjelasan apapun, hanya dengan bentuk json. Ikuti format ini tanpa penyimpangan. Berikan pembahasan hanya 2 baris saja. Do not return any non-json text or numbering`
   const prompt = `${jumlahSoalPrompt} ${mapelPrompt} ${tingkatKesulitanPrompt} ${topikPrompt} ${jawabanPrompt} ${aturanPrompt} ${bahasaPrompt} ${jsonPrompt}`
 
   const temperature = mapel.toLowerCase() === "matematika" ? 0.5 : 0.4
@@ -37,7 +37,7 @@ export const buatsoal = onCall({secrets: ["OPENAI_API_KEY"]}, async (req) => {
       }],
       stream: false,
       temperature,
-      max_tokens: 3500,
+      max_tokens: 4000,
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0,
