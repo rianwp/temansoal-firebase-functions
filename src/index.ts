@@ -37,7 +37,7 @@ export const buatsoal = onCall({secrets: ["OPENAI_API_KEY"]}, async (req) => {
       }],
       stream: false,
       temperature,
-      max_tokens: 4000,
+      max_tokens: 3500,
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0,
