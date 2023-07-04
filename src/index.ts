@@ -18,7 +18,7 @@ type generateQuestionForm = {
 
 export const buatsoal = onCall({secrets: ["OPENAI_API_KEY"], timeoutSeconds: 300}, async (req) => {
   const { mapel, tingkatKesulitan, haveOptions, topik, jumlahSoal } = req.data as generateQuestionForm
-  const jumlahSoalPrompt = `berikan ${jumlahSoal} soal ujian`
+  const jumlahSoalPrompt = `berikan ${jumlahSoal} jumlah soal ujian`
   const mapelPrompt = `untuk pelajaran ${mapel},`
   const tingkatKesulitanPrompt = `untuk tingkat ${tingkatKesulitan},`
   const topikPrompt = `dengan topik terkait: ${topik}`
