@@ -2,7 +2,7 @@ import { HttpsError, onCall } from "firebase-functions/v2/https"
 import { Configuration, OpenAIApi } from "openai"
 
 const configuration = new Configuration({
-  organization: "org-xslbDWvBTNfTnpTmWQhokK2j",
+  organization: "org-dI0H3NbmVT0j2x4x469GvOhh",
   apiKey: process.env.OPENAI_API_KEY,
 })
 
@@ -46,8 +46,9 @@ export const buatsoal = onCall({secrets: ["OPENAI_API_KEY"], timeoutSeconds: 300
     return {
       data: JSON.parse(completion.data.choices[0].message?.content as string)
     }
+    
   } catch(error) {
-    throw new HttpsError("internal", "Terjadi Kesalahan Pada Server")
+    throw new HttpsError("internal", String(error))
   }
 })
 
