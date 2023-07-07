@@ -2,7 +2,7 @@ import { HttpsError, onCall } from "firebase-functions/v2/https"
 import { Configuration, OpenAIApi } from "openai"
 
 const configuration = new Configuration({
-  organization: "org-dI0H3NbmVT0j2x4x469GvOhh",
+  organization: "org-sDSe26piBSIXFhgP6BuwbtB2",
   apiKey: process.env.OPENAI_API_KEY,
 })
 
@@ -31,7 +31,7 @@ export const buatsoal = onCall({secrets: ["OPENAI_API_KEY"], timeoutSeconds: 300
   const temperature = mapel.toLowerCase() === "matematika" ? 0.5 : 0.4
   try {
     const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
+      model: "gpt-3.5-turbo-16k",
       messages: [{
         role: "user", content: prompt
       }],
